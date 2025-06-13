@@ -1,0 +1,57 @@
+mixed-port: 7893
+allow-lan: true
+bind-address: "*"
+mode: rule
+log-level: info
+external-controller: 0.0.0.0:9090
+unified-delay: true
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*"
+  default-nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+  nameserver:
+    - https://dns.google/dns-query
+    - https://dns.cloudflare.com/dns-query
+  fallback-filter:
+    geoip: true
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+proxy-providers:
+  proxyNikki:
+    type: file
+    path: "./providers/proxy/proxyNikki.yaml"
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+proxy-groups:
+  - name: Telegram
+    type: select
+    disable-udp: false
+    proxies:
+      - DIRECT
+      - REJECT
+    use:
+      - proxyNikki
+rules:
+  - RULE-SET,Telegram,Telegram
+  - MATCH,DIRECT
+rule-providers:
+  Telegram:
+    type: file
+    behavior: classical
+    path: "./providers/rule/Telegram.yaml"
+redir-port: 7892
+tproxy-port: 7895
+port: 7890
+socks-port: 7891
+ipv6: false
+profile:
+  store-selected: true
