@@ -1,0 +1,27 @@
+proxies:
+
+#    Config vmess proxy
+#  - name: name
+#    server: server
+#    port: 443
+#    type: vmess
+#    uuid: uuid
+#    alterId: 0
+#    cipher: auto
+#    tls: false
+#    skip-cert-verify: true
+#    servername: google.com
+#    network: ws
+#    ws-opts:
+#      path: /google.com
+#      headers:
+#        Host: google.com
+#    udp: true
+
+#    Config sock5 proxy
+#  - name: name
+#    type: socks5
+#    server: server
+#    port: 443
+#    username: username
+#    password: password
